@@ -1,7 +1,54 @@
 <!DOCTYPE html>
-<html>
-  <body>
-    <h1>Version 1.0</h1>
-    <p>This is the baseline page content.</p>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AeroGlow Wireless Headphones — TechGear</title>
+  <style>
+    * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: #f8fafc; color: #0f172a; margin: 0; padding: 40px 20px; }
+    .container { max-width: 800px; margin: 0 auto; background: #ffffff; border-radius: 12px; padding: 32px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .nav { display: flex; justify-content: space-between; border-bottom: 1px solid #e2e8f0; padding-bottom: 16px; margin-bottom: 24px; }
+    .logo { font-weight: 700; font-size: 1.25rem; color: #2563eb; }
+    .badge { background: #dbeafe; color: #1e40af; padding: 4px 12px; border-radius: 9999px; font-size: 0.875rem; font-weight: 600; }
+    .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+    .product-image { width: 100%; height: 240px; background: #e2e8f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #64748b; font-weight: 600; }
+    .price { font-size: 2rem; font-weight: 700; color: #0f172a; margin: 12px 0; }
+    .status { color: #16a34a; font-weight: 600; margin-bottom: 16px; }
+    .btn { background: #2563eb; color: white; padding: 12px 24px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; width: 100%; }
+    .specs { margin-top: 24px; border-top: 1px solid #e2e8f0; padding-top: 16px; font-size: 0.9rem; color: #475569; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="nav">
+      <span class="logo">TechGear Store</span>
+      <span class="badge">In Stock</span>
+    </div>
+
+    <div class="product-grid">
+      <div class="product-image">[ Product Image ]</div>
+      <div>
+        <h1>AeroGlow Wireless Headphones</h1>
+        <p style="color: #64748b;">Premium noise-canceling over-ear headphones with 30-hour battery life.</p>
+        
+        <div class="price">$199.99</div>
+        <div class="status">✓ Available for immediate dispatch</div>
+        <button class="btn">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="specs">
+      <h3>Key Specifications</h3>
+      <ul>
+        <li>Battery Life: Up to 30 hours</li>
+        <li>Connectivity: Bluetooth 5.0</li>
+        <li>Color: Matte Black</li>
+        <li>Warranty: 1-Year Standard Warranty</li>
+      </ul>
+    </div>
+  </div>
+
+</body>
 </html>
