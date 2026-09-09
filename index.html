@@ -10,12 +10,13 @@
     .container { max-width: 800px; margin: 0 auto; background: #ffffff; border-radius: 12px; padding: 32px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
     .nav { display: flex; justify-content: space-between; border-bottom: 1px solid #e2e8f0; padding-bottom: 16px; margin-bottom: 24px; }
     .logo { font-weight: 700; font-size: 1.25rem; color: #2563eb; }
-    .badge { background: #dbeafe; color: #1e40af; padding: 4px 12px; border-radius: 9999px; font-size: 0.875rem; font-weight: 600; }
+    .badge { background: #fef3c7; color: #92400e; padding: 4px 12px; border-radius: 9999px; font-size: 0.875rem; font-weight: 600; }
     .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
     .product-image { width: 100%; height: 240px; background: #e2e8f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #64748b; font-weight: 600; }
-    .price { font-size: 2rem; font-weight: 700; color: #0f172a; margin: 12px 0; }
-    .status { color: #16a34a; font-weight: 600; margin-bottom: 16px; }
-    .btn { background: #2563eb; color: white; padding: 12px 24px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; width: 100%; }
+    .price { font-size: 2rem; font-weight: 700; color: #dc2626; margin: 12px 0; }
+    .old-price { font-size: 1.25rem; color: #94a3b8; text-decoration: line-through; margin-right: 8px; }
+    .status { color: #d97706; font-weight: 600; margin-bottom: 16px; }
+    .btn { background: #dc2626; color: white; padding: 12px 24px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; width: 100%; }
     .specs { margin-top: 24px; border-top: 1px solid #e2e8f0; padding-top: 16px; font-size: 0.9rem; color: #475569; }
   </style>
 </head>
@@ -24,28 +25,28 @@
   <div class="container">
     <div class="nav">
       <span class="logo">TechGear Store</span>
-      <span class="badge">In Stock</span>
+      <span class="badge">Limited Stock</span>
     </div>
 
     <div class="product-grid">
       <div class="product-image">[ Product Image ]</div>
       <div>
         <h1>AeroGlow Wireless Headphones</h1>
-        <p style="color: #64748b;">Premium noise-canceling over-ear headphones with 30-hour battery life.</p>
+        <p style="color: #64748b;">Updated v2 model with active noise cancellation and extended battery life.</p>
         
-        <div class="price">$199.99</div>
-        <div class="status">✓ Available for immediate dispatch</div>
-        <button class="btn">Add to Cart</button>
+        <div class="price"><span class="old-price">$199.99</span>$149.99</div>
+        <div class="status">⚠️ Only 3 items left in stock!</div>
+        <button class="btn">Claim Deal Now</button>
       </div>
     </div>
 
     <div class="specs">
       <h3>Key Specifications</h3>
       <ul>
-        <li>Battery Life: Up to 30 hours</li>
-        <li>Connectivity: Bluetooth 5.0</li>
+        <li>Battery Life: Up to 40 hours (Upgraded)</li>
+        <li>Connectivity: Bluetooth 5.2</li>
         <li>Color: Matte Black</li>
-        <li>Warranty: 1-Year Standard Warranty</li>
+        <li>Warranty: 2-Year Extended Warranty</li>
       </ul>
     </div>
   </div>
