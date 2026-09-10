@@ -3,66 +3,97 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AeroGlow Wireless Headphones — TechGear</title>
+  <title>PulseMetrics — Cloud Performance Overview</title>
   <style>
     * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: #f1f5f9; color: #0f172a; margin: 0; padding: 32px 16px; }
     
-    /* Switched to Dark Theme Palette */
-    body { background-color: #090d16; color: #f8fafc; margin: 0; padding: 40px 20px; }
-    .container { max-width: 800px; margin: 0 auto; background: #131b2e; border-radius: 12px; padding: 32px; border: 1px solid #1e293b; box-shadow: 0 4px 20px rgba(168, 85, 247, 0.2); }
-    .nav { display: flex; justify-content: space-between; border-bottom: 1px solid #1e293b; padding-bottom: 16px; margin-bottom: 24px; }
+    .dashboard { max-width: 900px; margin: 0 auto; background: #ffffff; border-radius: 12px; padding: 28px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); }
     
-    /* Brand Logo changed to Vibrant Neon Purple */
-    .logo { font-weight: 700; font-size: 1.25rem; color: #a855f7; }
+    /* Coral Accent Header */
+    .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ea580c; padding-bottom: 16px; margin-bottom: 24px; }
+    .logo { font-weight: 800; font-size: 1.35rem; color: #ea580c; text-transform: uppercase; letter-spacing: -0.5px; }
+    .status-pill { background: #ffedd5; color: #c2410c; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
     
-    /* Badge changed to Crimson/Neon Red Glow */
-    .badge { background: #3f0713; color: #fda4af; border: 1px solid #9f1239; padding: 4px 12px; border-radius: 9999px; font-size: 0.875rem; font-weight: 600; }
+    /* Metric Cards Grid */
+    .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
+    .card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; }
+    .card-title { font-size: 0.8rem; text-transform: uppercase; color: #64748b; font-weight: 600; margin-bottom: 8px; }
+    .card-value { font-size: 1.75rem; font-weight: 700; color: #0f172a; }
+    .card-trend { font-size: 0.85rem; font-weight: 600; color: #16a34a; margin-top: 4px; }
     
-    .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
-    .product-image { width: 100%; height: 240px; background: #1e293b; border-radius: 8px; border: 1px dashed #334155; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-weight: 600; }
+    /* Table Styling */
+    .data-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 0.9rem; }
+    .data-table th { background: #f8fafc; color: #475569; text-align: left; padding: 12px; border-bottom: 2px solid #e2e8f0; font-weight: 600; }
+    .data-table td { padding: 12px; border-bottom: 1px solid #f1f5f9; color: #334155; }
     
-    /* Price highlight changed to Electric Cyan */
-    .price { font-size: 2rem; font-weight: 700; color: #06b6d4; margin: 12px 0; }
-    .old-price { font-size: 1.25rem; color: #64748b; text-decoration: line-through; margin-right: 8px; }
-    .status { color: #f59e0b; font-weight: 600; margin-bottom: 16px; }
+    .badge-active { background: #dcfce7; color: #15803d; padding: 2px 8px; border-radius: 4px; font-weight: 600; font-size: 0.75rem; }
+    .badge-warn { background: #fef3c7; color: #b45309; padding: 2px 8px; border-radius: 4px; font-weight: 600; font-size: 0.75rem; }
     
-    /* Button changed to Purple Gradient Accent */
-    .btn { background: #a855f7; color: #ffffff; padding: 12px 24px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; width: 100%; transition: background 0.2s; }
-    .btn:hover { background: #9333ea; }
-    
-    .specs { margin-top: 24px; border-top: 1px solid #1e293b; padding-top: 16px; font-size: 0.9rem; color: #94a3b8; }
-    .specs h3 { color: #f8fafc; }
+    .action-btn { background: #ea580c; color: #ffffff; padding: 10px 20px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; float: right; margin-top: 20px; }
+    .action-btn:hover { background: #c2410c; }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <div class="nav">
-      <span class="logo">TechGear Store</span>
-      <span class="badge">Limited Stock</span>
+  <div class="dashboard">
+    <div class="header">
+      <span class="logo">⚡ PulseMetrics</span>
+      <span class="status-pill">Region: US-East (N. Virginia)</span>
     </div>
 
-    <div class="product-grid">
-      <div class="product-image">[ Product Image ]</div>
-      <div>
-        <h1>AeroGlow Wireless Headphones</h1>
-        <p style="color: #94a3b8;">Updated v2 model with active noise cancellation and extended battery life.</p>
-        
-        <div class="price"><span class="old-price">$199.99</span>$149.99</div>
-        <div class="status">⚠️ Only 3 items left in stock!</div>
-        <button class="btn">Claim Deal Now</button>
+    <div class="metrics-grid">
+      <div class="card">
+        <div class="card-title">Active Requests</div>
+        <div class="card-value">1.42 M</div>
+        <div class="card-trend">↑ +14.2% today</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Avg Response Time</div>
+        <div class="card-value">42 ms</div>
+        <div class="card-trend" style="color: #16a34a;">↓ -6 ms improvement</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Error Rate</div>
+        <div class="card-value">0.02 %</div>
+        <div class="card-trend" style="color: #2563eb;">Within SLA threshold</div>
       </div>
     </div>
 
-    <div class="specs">
-      <h3>Key Specifications</h3>
-      <ul>
-        <li>Battery Life: Up to 40 hours (Upgraded)</li>
-        <li>Connectivity: Bluetooth 5.2</li>
-        <li>Color: Neon Purple Edition</li>
-        <li>Warranty: 2-Year Extended Warranty</li>
-      </ul>
-    </div>
+    <h3>Active Cloud Nodes</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Node ID</th>
+          <th>Server Type</th>
+          <th>CPU Load</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>node-us-east-1a</td>
+          <td>c6i.2xlarge</td>
+          <td>34%</td>
+          <td><span class="badge-active">HEALTHY</span></td>
+        </tr>
+        <tr>
+          <td>node-us-east-1b</td>
+          <td>c6i.2xlarge</td>
+          <td>78%</td>
+          <td><span class="badge-warn">HIGH LOAD</span></td>
+        </tr>
+        <tr>
+          <td>node-us-east-1c</td>
+          <td>c6i.2xlarge</td>
+          <td>29%</td>
+          <td><span class="badge-active">HEALTHY</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button class="action-btn">Export Metrics Log</button>
+    <div style="clear: both;"></div>
   </div>
 
 </body>
