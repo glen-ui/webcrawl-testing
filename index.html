@@ -3,100 +3,97 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PulseMetrics — Cloud Performance Overview</title>
+  <title>Alex Rivera — Senior Systems Engineer</title>
   <style>
     * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: #f8fafc; color: #0f172a; margin: 0; padding: 40px 20px; line-height: 1.6; }
     
-    /* Background changed to Dark Slate */
-    body { background-color: #0b0f19; color: #f1f5f9; margin: 0; padding: 32px 16px; }
+    .portfolio { max-width: 850px; margin: 0 auto; }
     
-    /* Container background changed to Deep Midnight Slate */
-    .dashboard { max-width: 900px; margin: 0 auto; background: #1e293b; border-radius: 12px; padding: 28px; border: 1px solid #334155; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.1); }
+    /* Hero Header */
+    .hero { background: #ffffff; border-radius: 16px; padding: 40px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); margin-bottom: 24px; display: flex; gap: 32px; align-items: center; }
+    .avatar { width: 100px; height: 100px; background: #3b82f6; color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 700; flex-shrink: 0; }
+    .hero-info h1 { margin: 0 0 6px 0; font-size: 1.8rem; color: #0f172a; }
+    .hero-info .title { color: #3b82f6; font-weight: 600; margin-bottom: 12px; }
+    .hero-info p { margin: 0; color: #475569; font-size: 0.95rem; }
     
-    /* Mint Green Accent Header */
-    .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #10b981; padding-bottom: 16px; margin-bottom: 24px; }
-    .logo { font-weight: 800; font-size: 1.35rem; color: #10b981; text-transform: uppercase; letter-spacing: -0.5px; }
-    .status-pill { background: #064e3b; color: #6ee7b7; border: 1px solid #047857; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+    /* Content Layout */
+    .grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+    .card { background: #ffffff; border-radius: 12px; padding: 28px; border: 1px solid #e2e8f0; }
+    .card h2 { margin-top: 0; font-size: 1.25rem; color: #0f172a; border-bottom: 2px solid #eff6ff; padding-bottom: 8px; }
     
-    /* Metric Cards Grid */
-    .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
-    .card { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 16px; }
-    .card-title { font-size: 0.8rem; text-transform: uppercase; color: #94a3b8; font-weight: 600; margin-bottom: 8px; }
-    .card-value { font-size: 1.75rem; font-weight: 700; color: #f8fafc; }
-    .card-trend { font-size: 0.85rem; font-weight: 600; color: #34d399; margin-top: 4px; }
+    /* Projects List */
+    .project-item { margin-bottom: 20px; }
+    .project-item:last-child { margin-bottom: 0; }
+    .project-header { display: flex; justify-content: space-between; font-weight: 600; }
+    .project-title { color: #1e40af; }
+    .project-date { color: #94a3b8; font-size: 0.85rem; }
+    .project-desc { color: #64748b; font-size: 0.9rem; margin: 4px 0 0 0; }
     
-    /* Table Styling */
-    .data-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 0.9rem; }
-    .data-table th { background: #0f172a; color: #94a3b8; text-align: left; padding: 12px; border-bottom: 2px solid #334155; font-weight: 600; }
-    .data-table td { padding: 12px; border-bottom: 1px solid #334155; color: #cbd5e1; }
+    /* Skills Pills */
+    .skills-list { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0; }
+    .skill-tag { background: #eff6ff; color: #1d4ed8; padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; }
     
-    .badge-active { background: #064e3b; color: #6ee7b7; border: 1px solid #047857; padding: 2px 8px; border-radius: 4px; font-weight: 600; font-size: 0.75rem; }
-    .badge-warn { background: #451a03; color: #fcd34d; border: 1px solid #78350f; padding: 2px 8px; border-radius: 4px; font-weight: 600; font-size: 0.75rem; }
-    
-    .action-btn { background: #10b981; color: #022c22; padding: 10px 20px; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; float: right; margin-top: 20px; transition: background 0.2s; }
-    .action-btn:hover { background: #059669; color: #ffffff; }
+    /* Contact Button */
+    .btn-contact { display: inline-block; background: #2563eb; color: #ffffff; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; margin-top: 16px; text-align: center; width: 100%; }
+    .btn-contact:hover { background: #1d4ed8; }
   </style>
 </head>
 <body>
 
-  <div class="dashboard">
-    <div class="header">
-      <span class="logo">⚡ PulseMetrics</span>
-      <span class="status-pill">Region: US-East (N. Virginia)</span>
-    </div>
-
-    <div class="metrics-grid">
-      <div class="card">
-        <div class="card-title">Active Requests</div>
-        <div class="card-value">1.42 M</div>
-        <div class="card-trend">↑ +14.2% today</div>
-      </div>
-      <div class="card">
-        <div class="card-title">Avg Response Time</div>
-        <div class="card-value">42 ms</div>
-        <div class="card-trend" style="color: #34d399;">↓ -6 ms improvement</div>
-      </div>
-      <div class="card">
-        <div class="card-title">Error Rate</div>
-        <div class="card-value">0.02 %</div>
-        <div class="card-trend" style="color: #38bdf8;">Within SLA threshold</div>
+  <div class="portfolio">
+    
+    <!-- Hero Section -->
+    <div class="hero">
+      <div class="avatar">AR</div>
+      <div class="hero-info">
+        <h1>Alex Rivera</h1>
+        <div class="title">Senior Systems Engineer & Automation Architect</div>
+        <p>Specializing in distributed crawling infrastructure, cloud architecture, and high-throughput data pipelines.</p>
       </div>
     </div>
 
-    <h3>Active Cloud Nodes</h3>
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>Node ID</th>
-          <th>Server Type</th>
-          <th>CPU Load</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>node-us-east-1a</td>
-          <td>c6i.2xlarge</td>
-          <td>34%</td>
-          <td><span class="badge-active">HEALTHY</span></td>
-        </tr>
-        <tr>
-          <td>node-us-east-1b</td>
-          <td>c6i.2xlarge</td>
-          <td>78%</td>
-          <td><span class="badge-warn">HIGH LOAD</span></td>
-        </tr>
-        <tr>
-          <td>node-us-east-1c</td>
-          <td>c6i.2xlarge</td>
-          <td>29%</td>
-          <td><span class="badge-active">HEALTHY</span></td>
-        </tr>
-      </tbody>
-    </table>
+    <!-- Main Grid -->
+    <div class="grid">
+      
+      <!-- Main Content Column -->
+      <div class="card">
+        <h2>Recent Projects</h2>
+        
+        <div class="project-item">
+          <div class="project-header">
+            <span class="project-title">HyperScale Web Crawler</span>
+            <span class="project-date">2026</span>
+          </div>
+          <p class="project-desc">Engineered a distributed crawling cluster processing over 10M page snapshots daily with DOM change detection.</p>
+        </div>
 
-    <button class="action-btn">Export Metrics Log</button>
-    <div style="clear: both;"></div>
+        <div class="project-item">
+          <div class="project-header">
+            <span class="project-title">Visual Diff Engine</span>
+            <span class="project-date">2025</span>
+          </div>
+          <p class="project-desc">Built a computer-vision powered web page comparison utility using Playwright and OpenCV.</p>
+        </div>
+      </div>
+
+      <!-- Sidebar Column -->
+      <div class="card">
+        <h2>Core Skills</h2>
+        <ul class="skills-list">
+          <li class="skill-tag">Python</li>
+          <li class="skill-tag">Playwright</li>
+          <li class="skill-tag">Docker</li>
+          <li class="skill-tag">TypeScript</li>
+          <li class="skill-tag">Kubernetes</li>
+          <li class="skill-tag">AWS</li>
+        </ul>
+
+        <a href="mailto:alex@example.com" class="btn-contact">Contact Alex</a>
+      </div>
+
+    </div>
+
   </div>
 
 </body>
