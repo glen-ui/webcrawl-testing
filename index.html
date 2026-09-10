@@ -3,216 +3,179 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Enterprise Operations Dashboard</title>
+  <title>SkillPulse — Student Learning Dashboard</title>
   <style>
-    /* Fullscreen Viewport Setup */
+    /* Global Reset & Responsive Base */
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    html, body { width: 100vw; height: 100vh; overflow: hidden; background-color: #090d16; color: #f8fafc; }
+    body { background-color: #f8fafc; color: #0f172a; min-height: 100vh; padding: 16px; line-height: 1.5; }
 
-    /* App Container Layout */
-    .dashboard-app { display: grid; grid-template-rows: 60px 1fr; height: 100vh; width: 100vw; padding: 16px; gap: 16px; }
+    /* App Wrapper */
+    .app-container { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
 
     /* Header Bar */
-    .header { display: flex; justify-content: space-between; align-items: center; background: #131b2e; border: 1px solid #1e293b; border-radius: 10px; padding: 0 24px; }
-    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.25rem; color: #06b6d4; letter-spacing: -0.5px; }
-    .brand-icon { width: 12px; height: 12px; background: #06b6d4; border-radius: 50%; box-shadow: 0 0 10px #06b6d4; }
-    .nav-meta { display: flex; align-items: center; gap: 20px; font-size: 0.85rem; color: #94a3b8; }
-    .status-badge { background: #064e3b; color: #34d399; border: 1px solid #059669; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.75rem; }
-
-    /* Main Grid Area (Fills remaining height) */
-    .main-grid { display: grid; grid-template-columns: 280px 1fr 320px; gap: 16px; height: 100%; min-height: 0; }
-
-    /* Shared Card Styles */
-    .card { background: #131b2e; border: 1px solid #1e293b; border-radius: 10px; padding: 20px; display: flex; flex-direction: column; min-height: 0; }
-    .card-title { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.5px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
-
-    /* Left Column: Metric Cards Stack */
-    .left-col { display: flex; flex-direction: column; gap: 16px; }
-    .metric-card { background: #131b2e; border: 1px solid #1e293b; border-radius: 10px; padding: 18px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
-    .metric-value { font-size: 1.8rem; font-weight: 800; color: #ffffff; margin: 4px 0; }
-    .metric-trend { font-size: 0.8rem; font-weight: 600; }
-    .trend-up { color: #34d399; }
-    .trend-down { color: #f43f5e; }
-
-    /* Center Column: Analytics & Visualization */
-    .center-col { display: grid; grid-template-rows: 1fr 1fr; gap: 16px; min-height: 0; }
+    .header { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    .brand { font-weight: 800; font-size: 1.25rem; color: #4f46e5; display: flex; align-items: center; gap: 8px; }
+    .user-profile { display: flex; align-items: center; gap: 12px; }
+    .avatar { width: 36px; height: 36px; background: #4f46e5; color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; }
     
-    /* Simulated Bar Chart */
-    .chart-container { display: flex; align-items: flex-end; gap: 16px; height: 100%; padding-top: 10px; }
-    .bar-wrapper { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; height: 100%; justify-content: flex-end; }
-    .bar { width: 100%; background: linear-gradient(180deg, #06b6d4 0%, #1e293b 100%); border-radius: 4px 4px 0 0; transition: height 0.3s; }
-    .bar-label { font-size: 0.75rem; color: #64748b; }
+    /* Responsive Grid (Desktop: 3 columns | Mobile: Stacked 1 column) */
+    .dashboard-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    @media (min-width: 768px) {
+      .dashboard-grid { grid-template-columns: 2fr 1fr; }
+    }
 
-    /* Data Table */
-    .table-wrapper { overflow-y: auto; height: 100%; }
-    .data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left; }
-    .data-table th { position: sticky; top: 0; background: #131b2e; color: #94a3b8; padding: 10px; border-bottom: 2px solid #1e293b; font-weight: 600; }
-    .data-table td { padding: 10px; border-bottom: 1px solid #1e293b; color: #cbd5e1; }
+    /* Cards */
+    .card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .card-title { font-size: 1.1rem; font-weight: 700; color: #0f172a; }
 
-    /* Right Column: Feed & Operations */
-    .right-col { display: flex; flex-direction: column; gap: 16px; min-height: 0; }
-    .activity-feed { display: flex; flex-direction: column; gap: 12px; overflow-y: auto; }
-    .feed-item { background: #090d16; border: 1px solid #1e293b; border-radius: 8px; padding: 12px; font-size: 0.85rem; }
-    .feed-time { font-size: 0.7rem; color: #64748b; margin-bottom: 4px; }
-    .feed-text { color: #e2e8f0; font-weight: 500; }
+    /* Welcome Hero Banner */
+    .welcome-hero { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: #ffffff; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+    .welcome-hero h1 { font-size: 1.5rem; font-weight: 800; }
+    .welcome-hero p { font-size: 0.95rem; opacity: 0.9; }
 
-    /* Progress Ring / Gauge Area */
-    .gauge-container { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; }
-    .gauge-val { font-size: 2.2rem; font-weight: 800; color: #a855f7; }
-    .gauge-sub { font-size: 0.8rem; color: #94a3b8; }
+    /* Course List Cards */
+    .course-item { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px; margin-bottom: 12px; display: flex; flex-direction: column; gap: 12px; }
+    .course-item:last-child { margin-bottom: 0; }
+    .course-info h4 { font-size: 1rem; color: #0f172a; margin-bottom: 4px; }
+    .course-info p { font-size: 0.85rem; color: #64748b; }
+    
+    /* Progress Bar */
+    .progress-bar-bg { background: #e2e8f0; height: 8px; border-radius: 999px; overflow: hidden; }
+    .progress-bar-fill { background: #4f46e5; height: 100%; border-radius: 999px; }
+
+    /* Stats Grid */
+    .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .stat-card { background: #f1f5f9; border-radius: 8px; padding: 12px; text-align: center; }
+    .stat-val { font-size: 1.4rem; font-weight: 800; color: #4f46e5; }
+    .stat-lbl { font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase; }
+
+    /* Schedule Timeline */
+    .schedule-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .schedule-item { display: flex; gap: 12px; align-items: center; font-size: 0.85rem; }
+    .time-badge { background: #e0e7ff; color: #3730a3; padding: 4px 8px; border-radius: 6px; font-weight: 700; white-space: nowrap; }
+
+    /* Mobile Adjustments */
+    @media (max-width: 480px) {
+      body { padding: 8px; }
+      .header { padding: 12px 16px; }
+      .welcome-hero { padding: 16px; }
+      .welcome-hero h1 { font-size: 1.25rem; }
+      .stats-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
 
-  <div class="dashboard-app">
+  <div class="app-container">
     
-    <!-- Top Header Navigation -->
+    <!-- Header -->
     <header class="header">
       <div class="brand">
-        <div class="brand-icon"></div>
-        <span>APEX ANALYTICS</span>
+        <span>🎓 SkillPulse</span>
       </div>
-      <div class="nav-meta">
-        <span>System Status: <strong class="status-badge">ONLINE</strong></span>
-        <span>Environment: <strong>Production</strong></span>
-        <span>Updated: <strong>Just Now</strong></span>
+      <div class="user-profile">
+        <div class="avatar">JS</div>
       </div>
     </header>
 
-    <!-- Main Dynamic Layout -->
-    <main class="main-grid">
+    <!-- Welcome Hero -->
+    <section class="welcome-hero">
+      <h1>Welcome back, Alex! 👋</h1>
+      <p>You've completed 75% of your weekly learning goals. Keep it up!</p>
+    </section>
+
+    <!-- Responsive Main Grid -->
+    <div class="dashboard-grid">
       
-      <!-- Left Column: Primary Metrics -->
-      <section class="left-col">
-        <div class="metric-card">
-          <div class="card-title">Total Revenue</div>
-          <div class="metric-value">$842,910</div>
-          <div class="metric-trend trend-up">↑ +18.4% vs last month</div>
+      <!-- Left Column: Active Courses -->
+      <main class="card">
+        <div class="card-header">
+          <h2 class="card-title">In Progress Courses</h2>
         </div>
 
-        <div class="metric-card">
-          <div class="card-title">Active Users</div>
-          <div class="metric-value">124,502</div>
-          <div class="metric-trend trend-up">↑ +1,240 today</div>
+        <!-- Course 1 -->
+        <div class="course-item">
+          <div class="course-info">
+            <h4>Advanced Web Scraping & DOM Parsing</h4>
+            <p>Module 4: Handling Dynamic Single Page Apps</p>
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 4px; font-weight: 600; color: #475569;">
+              <span>Progress</span>
+              <span>80%</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" style="width: 80%;"></div>
+            </div>
+          </div>
         </div>
 
-        <div class="metric-card">
-          <div class="card-title">Avg Latency</div>
-          <div class="metric-value">28 ms</div>
-          <div class="metric-trend trend-up">↓ -4 ms improvement</div>
+        <!-- Course 2 -->
+        <div class="course-item">
+          <div class="course-info">
+            <h4>Modern CSS: Flexbox, Grid & Responsive Design</h4>
+            <p>Module 2: Building Mobile-First Interfaces</p>
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 4px; font-weight: 600; color: #475569;">
+              <span>Progress</span>
+              <span>45%</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" style="width: 45%;"></div>
+            </div>
+          </div>
         </div>
 
-        <div class="metric-card">
-          <div class="card-title">Error Rate</div>
-          <div class="metric-value">0.03%</div>
-          <div class="metric-trend trend-down">↑ +0.01% spike</div>
-        </div>
-      </section>
+      </main>
 
-      <!-- Center Column: Charts & Primary Data Table -->
-      <section class="center-col">
+      <!-- Right Column: Stats & Schedule -->
+      <aside style="display: flex; flex-direction: column; gap: 20px;">
         
-        <!-- Top Bar Chart Visual -->
+        <!-- Quick Stats -->
         <div class="card">
-          <div class="card-title">
-            <span>Weekly API Throughput (Millions)</span>
-            <span style="color: #06b6d4; font-size: 0.8rem;">Peak: 94M</span>
+          <div class="card-header">
+            <h2 class="card-title">Learning Stats</h2>
           </div>
-          <div class="chart-container">
-            <div class="bar-wrapper"><div class="bar" style="height: 60%;"></div><span class="bar-label">Mon</span></div>
-            <div class="bar-wrapper"><div class="bar" style="height: 75%;"></div><span class="bar-label">Tue</span></div>
-            <div class="bar-wrapper"><div class="bar" style="height: 45%;"></div><span class="bar-label">Wed</span></div>
-            <div class="bar-wrapper"><div class="bar" style="height: 90%;"></div><span class="bar-label">Thu</span></div>
-            <div class="bar-wrapper"><div class="bar" style="height: 80%;"></div><span class="bar-label">Fri</span></div>
-            <div class="bar-wrapper"><div class="bar" style="height: 95%;"></div><span class="bar-label">Sat</span></div>
-            <div class="bar-wrapper"><div class="bar" style="height: 70%;"></div><span class="bar-label">Sun</span></div>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-val">12.5</div>
+              <div class="stat-lbl">Hours Learned</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val">4</div>
+              <div class="stat-lbl">Completed</div>
+            </div>
           </div>
         </div>
 
-        <!-- Bottom Data Table -->
+        <!-- Upcoming Sessions -->
         <div class="card">
-          <div class="card-title">Regional Server Performance</div>
-          <div class="table-wrapper">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Region</th>
-                  <th>Cluster ID</th>
-                  <th>CPU Load</th>
-                  <th>Memory</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>US-East</td>
-                  <td>use-node-01</td>
-                  <td>42%</td>
-                  <td>12.4 GB</td>
-                  <td><span class="status-badge">HEALTHY</span></td>
-                </tr>
-                <tr>
-                  <td>US-West</td>
-                  <td>usw-node-04</td>
-                  <td>78%</td>
-                  <td>28.1 GB</td>
-                  <td><span class="status-badge" style="background:#854d0e; color:#fef08a; border-color:#a16207;">HIGH LOAD</span></td>
-                </tr>
-                <tr>
-                  <td>EU-Central</td>
-                  <td>euc-node-02</td>
-                  <td>31%</td>
-                  <td>8.9 GB</td>
-                  <td><span class="status-badge">HEALTHY</span></td>
-                </tr>
-                <tr>
-                  <td>AP-East</td>
-                  <td>ape-node-09</td>
-                  <td>19%</td>
-                  <td>6.2 GB</td>
-                  <td><span class="status-badge">HEALTHY</span></td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="card-header">
+            <h2 class="card-title">Upcoming Live Sessions</h2>
           </div>
+          <ul class="schedule-list">
+            <li class="schedule-item">
+              <span class="time-badge">10:00 AM</span>
+              <div>
+                <strong style="color: #0f172a;">Playwright Q&A Workshop</strong>
+                <div style="color: #64748b;">Live with Dr. Vance</div>
+              </div>
+            </li>
+            <li class="schedule-item">
+              <span class="time-badge">02:30 PM</span>
+              <div>
+                <strong style="color: #0f172a;">DOM Diffing Masterclass</strong>
+                <div style="color: #64748b;">Interactive Lab</div>
+              </div>
+            </li>
+          </ul>
         </div>
 
-      </section>
+      </aside>
 
-      <!-- Right Column: Secondary Metrics & Live Feed -->
-      <section class="right-col">
-        
-        <!-- Capacity Gauge -->
-        <div class="card" style="flex: 1;">
-          <div class="card-title">Storage Allocation</div>
-          <div class="gauge-container">
-            <div class="gauge-val">84.2%</div>
-            <div class="gauge-sub">842 TB of 1,000 TB used</div>
-          </div>
-        </div>
-
-        <!-- Live Activity Log -->
-        <div class="card" style="flex: 2;">
-          <div class="card-title">System Audit Log</div>
-          <div class="activity-feed">
-            <div class="feed-item">
-              <div class="feed-time">16:42:10 IST</div>
-              <div class="feed-text">Node [usw-node-04] triggered auto-scaling alert.</div>
-            </div>
-            <div class="feed-item">
-              <div class="feed-time">16:38:05 IST</div>
-              <div class="feed-text">Database backup snapshot #4901 completed successfully.</div>
-            </div>
-            <div class="feed-item">
-              <div class="feed-time">16:15:22 IST</div>
-              <div class="feed-text">SSL Certificate renewed for api.apexanalytics.io.</div>
-            </div>
-          </div>
-        </div>
-
-      </section>
-
-    </main>
+    </div>
 
   </div>
 
