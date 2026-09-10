@@ -3,102 +3,103 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alex Rivera — Senior Systems Engineer</title>
+  <title>The Skyline Penthouse — Apex Realty</title>
   <style>
     * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: #0f172a; color: #f8fafc; margin: 0; padding: 32px 16px; line-height: 1.5; }
     
-    /* Deep Midnight Dark Background */
-    body { background-color: #090d16; color: #f8fafc; margin: 0; padding: 40px 20px; line-height: 1.6; }
+    .listing-container { max-width: 900px; margin: 0 auto; background: #1e293b; border-radius: 16px; padding: 32px; border: 1px solid #334155; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
     
-    .portfolio { max-width: 850px; margin: 0 auto; }
+    /* Header & Price */
+    .property-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; border-bottom: 1px solid #334155; padding-bottom: 20px; }
+    .title-area h1 { margin: 0 0 6px 0; font-size: 1.8rem; color: #ffffff; }
+    .location { color: #94a3b8; font-size: 0.95rem; }
+    .price-tag { text-align: right; }
+    .price { font-size: 2rem; font-weight: 800; color: #8b5cf6; }
+    .status-badge { background: #064e3b; color: #34d399; border: 1px solid #059669; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
     
-    /* Dark Hero Header with Purple Glow Border */
-    .hero { background: #131b2e; border-radius: 16px; padding: 40px; border: 1px solid #1e293b; box-shadow: 0 4px 20px rgba(168, 85, 247, 0.15); margin-bottom: 24px; display: flex; gap: 32px; align-items: center; }
+    /* Image Showcase Grid */
+    .gallery-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; margin-bottom: 28px; }
+    .main-img { height: 260px; background: #334155; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-weight: 600; }
+    .side-imgs { display: flex; flex-direction: column; gap: 12px; }
+    .sub-img { height: 124px; background: #334155; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 0.85rem; }
     
-    /* Avatar changed to Purple with Electric Cyan Text */
-    .avatar { width: 100px; height: 100px; background: #a855f7; color: #06b6d4; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 700; flex-shrink: 0; border: 3px solid #06b6d4; }
+    /* Property Highlights Grid */
+    .specs-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; background: #0f172a; padding: 16px; border-radius: 10px; margin-bottom: 28px; text-align: center; border: 1px solid #1e293b; }
+    .spec-val { font-size: 1.25rem; font-weight: 700; color: #f8fafc; }
+    .spec-lbl { font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; margin-top: 2px; }
     
-    .hero-info h1 { margin: 0 0 6px 0; font-size: 1.8rem; color: #f8fafc; }
+    /* Layout Details */
+    .content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+    .description h3 { margin-top: 0; color: #8b5cf6; }
+    .description p { color: #cbd5e1; font-size: 0.95rem; }
     
-    /* Title tag changed to Neon Purple */
-    .hero-info .title { color: #c084fc; font-weight: 700; margin-bottom: 12px; }
-    .hero-info p { margin: 0; color: #94a3b8; font-size: 0.95rem; }
-    
-    /* Content Layout */
-    .grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
-    .card { background: #131b2e; border-radius: 12px; padding: 28px; border: 1px solid #1e293b; }
-    .card h2 { margin-top: 0; font-size: 1.25rem; color: #f8fafc; border-bottom: 2px solid #1e293b; padding-bottom: 8px; }
-    
-    /* Projects List */
-    .project-item { margin-bottom: 20px; }
-    .project-item:last-child { margin-bottom: 0; }
-    .project-header { display: flex; justify-content: space-between; font-weight: 600; }
-    .project-title { color: #06b6d4; }
-    .project-date { color: #a855f7; font-size: 0.85rem; }
-    .project-desc { color: #94a3b8; font-size: 0.9rem; margin: 4px 0 0 0; }
-    
-    /* Skills Pills - Dark Translucent Fills with Cyan Borders */
-    .skills-list { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0; }
-    .skill-tag { background: #082f49; color: #38bdf8; border: 1px solid #0284c7; padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 700; }
-    
-    /* Contact Button - Electric Cyan Button */
-    .btn-contact { display: inline-block; background: #06b6d4; color: #090d16; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; margin-top: 16px; text-align: center; width: 100%; transition: background 0.2s; }
-    .btn-contact:hover { background: #22d3ee; }
+    /* Agent Contact Card */
+    .agent-card { background: #0f172a; border-radius: 10px; padding: 20px; border: 1px solid #334155; }
+    .agent-name { font-weight: 700; color: #ffffff; margin-bottom: 4px; }
+    .agent-title { font-size: 0.8rem; color: #94a3b8; margin-bottom: 16px; }
+    .btn-tour { width: 100%; background: #8b5cf6; color: #ffffff; padding: 12px; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+    .btn-tour:hover { background: #7c3aed; }
   </style>
 </head>
 <body>
 
-  <div class="portfolio">
+  <div class="listing-container">
     
-    <!-- Hero Section -->
-    <div class="hero">
-      <div class="avatar">AR</div>
-      <div class="hero-info">
-        <h1>Alex Rivera</h1>
-        <div class="title">Senior Systems Engineer & Automation Architect</div>
-        <p>Specializing in distributed crawling infrastructure, cloud architecture, and high-throughput data pipelines.</p>
+    <!-- Top Bar / Title -->
+    <div class="property-header">
+      <div class="title-area">
+        <h1>The Skyline Penthouse</h1>
+        <div class="location">📍 742 Evergreen Terrace, Unit 40B, New York, NY</div>
+      </div>
+      <div class="price-tag">
+        <span class="status-badge">Active Listing</span>
+        <div class="price">$2,450,000</div>
       </div>
     </div>
 
-    <!-- Main Grid -->
-    <div class="grid">
-      
-      <!-- Main Content Column -->
-      <div class="card">
-        <h2>Recent Projects</h2>
-        
-        <div class="project-item">
-          <div class="project-header">
-            <span class="project-title">HyperScale Web Crawler</span>
-            <span class="project-date">2026</span>
-          </div>
-          <p class="project-desc">Engineered a distributed crawling cluster processing over 10M page snapshots daily with DOM change detection.</p>
-        </div>
+    <!-- Photo Gallery -->
+    <div class="gallery-grid">
+      <div class="main-img">[ Main Panoramic View ]</div>
+      <div class="side-imgs">
+        <div class="sub-img">[ Living Room ]</div>
+        <div class="sub-img">[ Primary Suite ]</div>
+      </div>
+    </div>
 
-        <div class="project-item">
-          <div class="project-header">
-            <span class="project-title">Visual Diff Engine</span>
-            <span class="project-date">2025</span>
-          </div>
-          <p class="project-desc">Built a computer-vision powered web page comparison utility using Playwright and OpenCV.</p>
-        </div>
+    <!-- Quick Stats -->
+    <div class="specs-row">
+      <div>
+        <div class="spec-val">3,200</div>
+        <div class="spec-lbl">Sq. Ft.</div>
+      </div>
+      <div>
+        <div class="spec-val">4</div>
+        <div class="spec-lbl">Bedrooms</div>
+      </div>
+      <div>
+        <div class="spec-val">3.5</div>
+        <div class="spec-lbl">Bathrooms</div>
+      </div>
+      <div>
+        <div class="spec-val">2024</div>
+        <div class="spec-lbl">Year Built</div>
+      </div>
+    </div>
+
+    <!-- Details and Tour Request -->
+    <div class="content-grid">
+      <div class="description">
+        <h3>Property Overview</h3>
+        <p>Experience unmatched luxury living in this corner penthouse featuring floor-to-ceiling glass windows, a private wraparound terrace, and panoramic skyline views.</p>
+        <p>Includes smart home integration, private elevator access, and a custom Italian marble kitchen island.</p>
       </div>
 
-      <!-- Sidebar Column -->
-      <div class="card">
-        <h2>Core Skills</h2>
-        <ul class="skills-list">
-          <li class="skill-tag">Python</li>
-          <li class="skill-tag">Playwright</li>
-          <li class="skill-tag">Docker</li>
-          <li class="skill-tag">TypeScript</li>
-          <li class="skill-tag">Kubernetes</li>
-          <li class="skill-tag">AWS</li>
-        </ul>
-
-        <a href="mailto:alex@example.com" class="btn-contact">Contact Alex</a>
+      <div class="agent-card">
+        <div class="agent-name">Sarah Jenkins</div>
+        <div class="agent-title">Licensed Senior Broker</div>
+        <button class="btn-tour">Schedule Private Showing</button>
       </div>
-
     </div>
 
   </div>
